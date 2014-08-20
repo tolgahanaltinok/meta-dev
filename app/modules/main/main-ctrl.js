@@ -1,66 +1,48 @@
 'use strict';
 
 angular.module('metaTemp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      {
-        'key': 'angular',
-        'title': 'AngularJS',
-        'url': 'https://angularjs.org/',
-        'description': 'HTML enhanced for web apps!',
-        'logo': 'angular.png'
-      },
-      {
-        'key': 'browsersync',
-        'title': 'BrowserSync',
-        'url': 'http://browsersync.io/',
-        'description': 'Time-saving synchronised browser testing.',
-        'logo': 'browsersync.png'
-      },
-      {
-        'key': 'gulp',
-        'title': 'GulpJS',
-        'url': 'http://gulpjs.com/',
-        'description': 'The streaming build system.',
-        'logo': 'gulp.png'
-      },
-      {
-        'key': 'jasmine',
-        'title': 'Jasmine',
-        'url': 'http://jasmine.github.io/',
-        'description': 'Behavior-Driven JavaScript.',
-        'logo': 'jasmine.png'
-      },
-      {
-        'key': 'karma',
-        'title': 'Karma',
-        'url': 'http://karma-runner.github.io/',
-        'description': 'Spectacular Test Runner for JavaScript.',
-        'logo': 'karma.png'
-      },
-      {
-        'key': 'protractor',
-        'title': 'Protractor',
-        'url': 'https://github.com/angular/protractor',
-        'description': 'End to end test framework for AngularJS applications built on top of WebDriverJS.',
-        'logo': 'protractor.png'
-      },
-      {
-        'key': 'jquery',
-        'title': 'jQuery',
-        'url': 'http://gulpjs.com/',
-        'description': 'The streaming build system.',
-        'logo': 'jquery.jpg'
-      },
-      {
-        'key': 'bootstrap',
-        'title': 'Bootstrap',
-        'url': 'http://getbootstrap.com/',
-        'description': 'Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.',
-        'logo': 'bootstrap.png'
-      }
-    ];
-    angular.forEach($scope.awesomeThings, function(awesomeThing) {
-      awesomeThing.rank = Math.random();
-    });
-  });
+  .controller('mainCtrl', function ($scope) {
+  })
+  .controller('loginCtrl', ['$scope', '$state', 'authService', function ($scope, $state, authService) {
+    $scope.login = function (userLogin) {
+        $scope.errorMessage = '';
+        authService.login(userLogin).$promise
+        .then(function (data) {
+            $state.go('home');
+        }).catch(function (errorResponse) {
+            if (errorResponse.status == 404) {
+                $scope.errorMessage = errorResponse.data;
+            }
+            if (errorResponse.status === 400) {
+                $scope.errorMessage = "Invalid Email/Password";
+            }
+            else {
+                $scope.errorMessage = "An error occured while performing this action. Please try after some time.";
+            }
+        });
+    };
+  }])
+  .controller('registerCtrl', ['$scope', '$state', 'authService', function ($scope, $state, authService) {
+    $scope.register = function (userRegistration) {
+        if (userRegistration.password !== userRegistration.confirmPassword) {
+            console.log( "Passwords do not match");
+            return;
+        }
+
+        $scope.errorMessage = '';
+
+        authService.registerUser(userRegistration).$promise
+        .then(function (data) {
+            return authService.login({ userName: userRegistration.userName, password: userRegistration.password }).$promise.then(function (data) {
+                $state.go('home');
+            });
+        }).catch(function (error) {
+            if (error.status === 400) {
+                $scope.errorMessage = "Email already exists.";
+            }
+            else {
+                $scope.errorMessage = "An error occured while performing this action. Please try after some time.";
+            }
+        });
+    };
+  }])

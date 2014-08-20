@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('metaTemp').factory('authServiceHelper', ['$http', '$resource', function ($http, $resource) {
-    var baseUrl = config.apiurl;
+angular.module('metaTemp').factory('authServiceHelper', ['$http', '$resource','ngAuthSettings', function ($http, $resource,ngAuthSettings) {
+    var baseUrl = ngAuthSettings.apiServiceBaseUri;
     var buildUrl = function (resourceUrl) {
         return baseUrl + resourceUrl;
     };

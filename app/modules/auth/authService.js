@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('metaTemp')
-  .service('authService', ['$http', '$cookieStore', function User($http, $cookieStore) {
+  .service('authService', ['$http', '$cookieStore','authServiceHelper', 
+    function User($http, $cookieStore, authServiceHelper) {
     
+    var Token = authServiceHelper.AuthorizationToken;
+    var AccountRegister = authServiceHelper.AccountRegister;
+    var AccountLogOff = authServiceHelper.AccountLogOff;
 
     var userData = {
       isAuthenticated: false,
@@ -12,6 +16,26 @@ angular.module('metaTemp')
     };
 
     
+    function NoAuthenticationException(message) {
+      this.name = 'AuthenticationRequired';
+      this.message = message;
+    }
+
+    function NextStateUndefinedException(message) {
+      this.name = 'NextStateUndefined';
+      this.message = message;
+    }
+
+    function AuthenticationExpiredException(message) {
+      this.name = 'AuthenticationExpired';
+      this.message = message;
+    }
+
+    function AuthenticationRetrievalException(message) {
+      this.name = 'AuthenticationRetrieval';
+      this.message = message;
+    }
+
     function isAuthenticationExpired(expirationDate) {
       var now = new Date();
       expirationDate = new Date(expirationDate);
@@ -34,9 +58,7 @@ angular.module('metaTemp')
     function retrieveSavedData() {
       var savedData = $cookieStore.get('auth_data');
       if (typeof savedData === 'undefined') {
-        throw new AuthenticationRetrievalException('No authentication data exists');
-      } else if (isAuthenticationExpired(savedData.expirationDate)) {
-        throw new AuthenticationExpiredException('Authentication token has already expired');
+        clearUserData();
       } else {
         userData = savedData;
         setHttpAuthHeader();
@@ -55,15 +77,14 @@ angular.module('metaTemp')
     }
 
     this.isAuthenticated = function() {
-      if (userData.isAuthenticated && !isAuthenticationExpired(userData.expirationDate)) {
+      if (userData.isAuthenticated) {
         return true;
       } else {
-        try {
           retrieveSavedData();
-        } catch (e) {
-          throw new NoAuthenticationException('Authentication not found');
-        }
-        return true;
+          if (!isAuthenticationExpired(userData.expirationDate)) {
+            return true;
+          }
+          return false;
       }
     };
 
@@ -77,24 +98,19 @@ angular.module('metaTemp')
       $http.defaults.headers.common.Authorization = null;
     };
 
-    this.authenticate = function(username, password, successCallback, errorCallback, persistData) {
+    this.authenticate = function(username, password, persistData, successCallback, errorCallback) {
       this.removeAuthentication();
-      var config = {
-        method: 'POST',
-        url: 'http://192.168.1.44:42042/token',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: 'grant_type=password&username=' + username + '&password=' + password,
-      };
+      var data = 'grant_type=password&username=' + username + '&password=' + password;
 
-      $http(config)
-        .success(function(data) {
+      Token
+        .requestToken(buildFormData(formData), function (data) {
           userData.isAuthenticated = true;
           userData.username = data.userName;
           userData.bearerToken = data.access_token;
           userData.expirationDate = new Date(data['.expires']);
+
           setHttpAuthHeader();
+
           if (persistData === true) {
             saveData();
           }
@@ -112,4 +128,13 @@ angular.module('metaTemp')
           }
         });
     };
+
+    this.registerUser = function (userRegistration) {
+        var registration = AccountRegister.register(userRegistration);
+        return registration;
+    };
+    this.logOffUser = function () {
+        this.removeAuthentication();
+    };
+
   }]);
