@@ -3,10 +3,10 @@
 angular.module('metaTemp')
   .controller('mainCtrl', function ($scope) {
   })
-  .controller('loginCtrl', ['$scope', '$state', 'authService', function ($scope, $state, authService) {
+  .controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {
     $scope.login = function (userLogin) {
         $scope.errorMessage = '';
-        authService.login(userLogin).$promise
+        authService.authenticate(userLogin.userName,userLogin.password).$promise
         .then(function (data) {
             $state.go('home');
         }).catch(function (errorResponse) {
@@ -30,9 +30,8 @@ angular.module('metaTemp')
         }
 
         $scope.errorMessage = '';
-
-        authService.registerUser(userRegistration).$promise
-        .then(function (data) {
+        var deferred = $q.defer();
+        authService.registerUser(userRegistration).success(function (data) {
             return authService.login({ userName: userRegistration.userName, password: userRegistration.password }).$promise.then(function (data) {
                 $state.go('home');
             });

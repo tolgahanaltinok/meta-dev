@@ -98,12 +98,12 @@ angular.module('metaTemp')
       $http.defaults.headers.common.Authorization = null;
     };
 
-    this.authenticate = function(username, password, persistData, successCallback, errorCallback) {
+    this.authenticate = function(username, password, persistData) {
       this.removeAuthentication();
       var data = 'grant_type=password&username=' + username + '&password=' + password;
 
       Token
-        .requestToken(buildFormData(formData), function (data) {
+        .requestToken(data, function (data) {
           userData.isAuthenticated = true;
           userData.username = data.userName;
           userData.bearerToken = data.access_token;
@@ -114,18 +114,7 @@ angular.module('metaTemp')
           if (persistData === true) {
             saveData();
           }
-          if (typeof successCallback === 'function') {
-            successCallback();
-          }
-        })
-        .error(function(data) {
-          if (typeof errorCallback === 'function') {
-            if (data.error_description) {
-              errorCallback(data.error_description);
-            } else {
-              errorCallback('Unable to contact server; please, try again later.');
-            }
-          }
+          
         });
     };
 

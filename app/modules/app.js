@@ -26,6 +26,7 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
 
     $urlRouterProvider.otherwise("/");
 
+	$httpProvider.interceptors.push('authorizationInterceptor');
     
   }])
   .run(function($rootScope, $state, authService) {
