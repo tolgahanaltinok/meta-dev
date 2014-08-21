@@ -1,19 +1,21 @@
 'use strict';
 
 angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router','ui.bootstrap'])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',  
+    function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-  	$locationProvider.html5Mode(true);
+  	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.useXDomain = true;
 
     $stateProvider
     	.state('login', {
 	        url: '/login',
-	        templateUrl: "/modules/view/loginView.html",
+	        templateUrl: "/modules/auth/view/loginView.html",
 	        controller: 'loginCtrl'
 	    })
 	    .state('register', {
 	        url: '/register',
-	        templateUrl: "/modules/view/registerView.html",
+	        templateUrl: "/modules/auth/view/registerView.html",
 	        controller: 'registerCtrl'
 	    })
 	    .state('main', {
@@ -25,7 +27,7 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
     $urlRouterProvider.otherwise("/");
 
     
-  })
+  }])
   .run(function($rootScope, $state, authService) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, error) {
 		if (toState.name !== "login" && toState.name !== "register") {
