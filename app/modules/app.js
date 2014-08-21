@@ -4,7 +4,8 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider','$provide',  
     function ($stateProvider, $urlRouterProvider, $httpProvider,$provide) {
 
-  	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.useXDomain = true;
 
     $stateProvider
@@ -41,7 +42,7 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
     });
   });
 
-  var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/'; 
+  var serviceBase = 'http://localhost:16516/'; 
   
   angular.module('metaTemp').constant('ngAuthSettings', {
   	apiServiceBaseUri: serviceBase,

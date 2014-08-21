@@ -2256,9 +2256,7 @@ Bordered form layout
 Uniform plugin css changes
 ***/
 
-.radio, .checkbox {
-  padding-left: 0px !important;
-}
+
 
 .checkbox .checker {
   margin-top: -2px !important;

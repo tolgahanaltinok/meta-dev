@@ -10,7 +10,9 @@ angular.module('metaTemp')
     return {
         AuthorizationToken: $resource(buildUrl("Token"), null,
         {
-            requestToken: { method: 'POST', headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+            requestToken: { 
+                method: 'POST', headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            }
         }),
         AccountRegister: $resource(buildUrl('api/Account/Register'), null,
             {

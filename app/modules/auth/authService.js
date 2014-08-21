@@ -98,12 +98,21 @@ angular.module('metaTemp')
       $http.defaults.headers.common.Authorization = null;
     };
 
+    function buildFormData(formData) {
+        var dataString = '';
+        for (var prop in formData) {
+            if (formData.hasOwnProperty(prop)) {
+                dataString += (prop + '=' + formData[prop] + '&');
+            }
+        }
+        return dataString.slice(0, dataString.length - 1);
+    };
+
     this.authenticate = function(username, password, persistData) {
       this.removeAuthentication();
-      var data = 'grant_type=password&username=' + username + '&password=' + password;
 
-      return Token
-        .requestToken(data, function (data) {
+      var formData = { Username: username, Password: password, grant_type: 'password' };
+      return Token.requestToken(buildFormData(formData), function (data) {
           userData.isAuthenticated = true;
           userData.username = data.userName;
           userData.bearerToken = data.access_token;

@@ -32,7 +32,8 @@ angular.module('metaTemp')
         $scope.errorMessage = '';
         var deferred = $q.defer();
         authService.registerUser(userRegistration).success(function (data) {
-            return authService.login({ userName: userRegistration.userName, password: userRegistration.password }).$promise.then(function (data) {
+            return authService.login({ userName: userRegistration.userName, password: userRegistration.password }).$promise
+            .then(function (data) {
                 $state.go('home');
             });
         }).catch(function (error) {
