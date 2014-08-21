@@ -4,11 +4,11 @@ angular.module('metaTemp')
   .controller('mainCtrl', function ($scope) {
   })
   .controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {
-    $scope.login = function (userLogin) {
+$scope.login = function (userLogin) {
         $scope.errorMessage = '';
-        authService.authenticate(userLogin.userName,userLogin.password).$promise
+        authService.login(userLogin).$promise
         .then(function (data) {
-            $state.go('home');
+            $state.go('main');
         }).catch(function (errorResponse) {
             if (errorResponse.status == 404) {
                 $scope.errorMessage = errorResponse.data;

@@ -10,9 +10,7 @@ angular.module('metaTemp')
     return {
         AuthorizationToken: $resource(buildUrl("Token"), null,
         {
-            requestToken: { 
-                method: 'POST', headers: { "Content-Type": "application/x-www-form-urlencoded" }
-            }
+            requestToken: { method: 'POST', headers: { "Content-Type": "application/x-www-form-urlencoded" } }
         }),
         AccountRegister: $resource(buildUrl('api/Account/Register'), null,
             {
@@ -28,7 +26,7 @@ angular.module('metaTemp')
 
 angular.module('metaTemp')
 .factory('authorizationInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
-return {
+    return {
         responseError: function (rejection) {
             switch (rejection.status) {
                 case 401: {

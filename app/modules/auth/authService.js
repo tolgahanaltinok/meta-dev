@@ -1,42 +1,22 @@
 'use strict';
 
 angular.module('metaTemp')
-  .service('authService', ['$http', '$cookieStore','authServiceHelper', 
-    function User($http, $cookieStore, authServiceHelper) {
-    
+  .factory('authService',
+    ['$http','authServiceHelper','$cookieStore',
+        function ($http, authServiceHelper, $cookieStore) {
+
     var Token = authServiceHelper.AuthorizationToken;
     var AccountRegister = authServiceHelper.AccountRegister;
     var AccountLogOff = authServiceHelper.AccountLogOff;
 
-    var userData = {
+    var userData = { 
       isAuthenticated: false,
       username: '',
       bearerToken: '',
       expirationDate: null,
     };
 
-    
-    function NoAuthenticationException(message) {
-      this.name = 'AuthenticationRequired';
-      this.message = message;
-    }
-
-    function NextStateUndefinedException(message) {
-      this.name = 'NextStateUndefined';
-      this.message = message;
-    }
-
-    function AuthenticationExpiredException(message) {
-      this.name = 'AuthenticationExpired';
-      this.message = message;
-    }
-
-    function AuthenticationRetrievalException(message) {
-      this.name = 'AuthenticationRetrieval';
-      this.message = message;
-    }
-
-    function isAuthenticationExpired(expirationDate) {
+    var isAuthenticationExpired = function(expirationDate) {
       var now = new Date();
       expirationDate = new Date(expirationDate);
       if (expirationDate - now > 0) {
@@ -46,16 +26,16 @@ angular.module('metaTemp')
       }
     }
 
-    function saveData() {
+    var saveData = function() {
       removeData();
       $cookieStore.put('auth_data', userData);
     }
 
-    function removeData() {
+    var removeData = function() {
       $cookieStore.remove('auth_data');
     }
 
-    function retrieveSavedData() {
+    var retrieveSavedData = function() {
       var savedData = $cookieStore.get('auth_data');
       if (typeof savedData === 'undefined') {
         clearUserData();
@@ -65,18 +45,18 @@ angular.module('metaTemp')
       }
     }
 
-    function clearUserData() {
+    var clearUserData = function() {
       userData.isAuthenticated = false;
       userData.username = '';
       userData.bearerToken = '';
       userData.expirationDate = null;
     }
 
-    function setHttpAuthHeader() {
+    var setHttpAuthHeader = function() {
       $http.defaults.headers.common.Authorization = 'Bearer ' + userData.bearerToken;
     }
 
-    this.isAuthenticated = function() {
+    var isAuthenticated = function() {
       if (userData.isAuthenticated) {
         return true;
       } else {
@@ -88,17 +68,7 @@ angular.module('metaTemp')
       }
     };
 
-    this.getUserData = function(){
-      return userData;
-    };
-
-    this.removeAuthentication = function() {
-      removeData();
-      clearUserData();
-      $http.defaults.headers.common.Authorization = null;
-    };
-
-    function buildFormData(formData) {
+    var buildFormData = function (formData) {
         var dataString = '';
         for (var prop in formData) {
             if (formData.hasOwnProperty(prop)) {
@@ -108,31 +78,37 @@ angular.module('metaTemp')
         return dataString.slice(0, dataString.length - 1);
     };
 
-    this.authenticate = function(username, password, persistData) {
-      this.removeAuthentication();
+    return {
+        login: function (userLogin) {
+            var formData = { Username: userLogin.userName, Password: userLogin.password, grant_type: 'password' };
+            return Token.requestToken(buildFormData(formData), function (data) {
+                  userData.isAuthenticated = true;
+                  userData.username = data.userName;
+                  userData.bearerToken = data.access_token;
+                  userData.expirationDate = new Date(data['.expires']);
 
-      var formData = { Username: username, Password: password, grant_type: 'password' };
-      return Token.requestToken(buildFormData(formData), function (data) {
-          userData.isAuthenticated = true;
-          userData.username = data.userName;
-          userData.bearerToken = data.access_token;
-          userData.expirationDate = new Date(data['.expires']);
+                  setHttpAuthHeader();
 
-          setHttpAuthHeader();
-
-          if (persistData === true) {
-            saveData();
-          }
-          
-        });
+                  if (userLogin.persistData === true) {
+                    saveData();
+                  }
+            });
+        },
+        registerUser: function (userRegistration) {
+            var registration = AccountRegister.register(userRegistration);
+            return registration;
+        },
+        logOffUser: function () {
+            AccountLogOff.logOff();
+            $http.defaults.headers.common.Authorization = undefined;
+            CurrentUser = { id: '0',username: '', name: '',surname: ''};
+        },
+        getCurrentUser : function(){
+            return CurrentUser;
+        },
+        setCurrentUser: function(user) {
+                CurrentUser = user ;
+        },
+        isLoggedIn: isAuthenticated
     };
-
-    this.registerUser = function (userRegistration) {
-        var registration = AccountRegister.register(userRegistration);
-        return registration;
-    };
-    this.logOffUser = function () {
-        this.removeAuthentication();
-    };
-
-  }]);
+}]);
