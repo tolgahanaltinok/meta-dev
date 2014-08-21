@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router','ui.bootstrap'])
-  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',  
-    function ($stateProvider, $urlRouterProvider, $httpProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider','$provide',  
+    function ($stateProvider, $urlRouterProvider, $httpProvider,$provide) {
 
   	delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.useXDomain = true;
@@ -27,6 +27,7 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
     $urlRouterProvider.otherwise("/");
 
 	$httpProvider.interceptors.push('authorizationInterceptor');
+	 $httpProvider.interceptors.push('httpInterceptor');
     
   }])
   .run(function($rootScope, $state, authService) {

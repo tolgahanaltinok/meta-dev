@@ -102,7 +102,7 @@ angular.module('metaTemp')
       this.removeAuthentication();
       var data = 'grant_type=password&username=' + username + '&password=' + password;
 
-      Token
+      return Token
         .requestToken(data, function (data) {
           userData.isAuthenticated = true;
           userData.username = data.userName;
