@@ -40,6 +40,11 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 event.preventDefault();
                 $state.go('login');
             }
+        }else{
+          if (authService.isLoggedIn()) {
+                event.preventDefault();
+                $state.go('main');
+            }
         }
     });
   });
@@ -49,4 +54,6 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
   angular.module('metaTemp').constant('ngAuthSettings', {
   	apiServiceBaseUri: serviceBase,
   });
+
+  var app = angular.module('metaTemp');
 

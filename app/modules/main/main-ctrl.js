@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('metaTemp')
-  .controller('mainCtrl', function ($scope) {
+app.controller('mainCtrl', function ($scope) {
   })
   .controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {
 $scope.login = function (userLogin) {
