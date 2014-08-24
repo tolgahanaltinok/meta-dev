@@ -328,7 +328,7 @@
           <!-- END RESPONSIVE QUICK SEARCH FORM -->
         </li>
         <li class="start active">
-          <a ui-sref="main.dashboard.list" href="#/main/dashboard/list">
+          <a ui-sref="main.dashboard.list">
           <i class="icon-home"></i> 
           <span class="title">Dashboard</span>
           <span class="selected"></span>
@@ -343,7 +343,7 @@
           </a>
           <ul class="sub-menu" style="display:block">
             <li ng-repeat="network in networks">
-              <a ui-sref="main.network({networkId:network.id})">
+              <a ui-sref="main.dashboard.list({networkId:network.id})">
                 {{network.name}}</a>
             </li>
             <li>

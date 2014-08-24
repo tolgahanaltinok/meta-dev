@@ -24,17 +24,23 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
 	        controller: 'mainCtrl'
 	    })
       .state('main.dashboard', {
+        abstract: true,
           url: '/dashboard',
           templateUrl: "/modules/main/views/dashboardView.html",
           controller: 'dashboardCtrl'
       })
       .state('main.dashboard.list', {
-          url: '/list',
+          url: '/list/:networkId',
           templateUrl: "/modules/main/views/dashboard.listView.html"
       })
       .state('main.dashboard.balloon', {
           url: '/balloon',
           templateUrl: "/modules/main/views/dashboard.balloonView.html"
+      })
+
+      .state('main.network', {
+          url: '/network',
+          templateUrl: "/modules/network/views/networkView.html",
       })
       .state('main.network.list', {
           url: '/list',
