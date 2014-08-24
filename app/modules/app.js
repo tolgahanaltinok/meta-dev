@@ -31,6 +31,10 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
       .state('main.dashboard.list', {
           url: '/list',
           templateUrl: "/modules/main/views/dashboard.listView.html"
+      })
+      .state('main.dashboard.balloon', {
+          url: '/list',
+          templateUrl: "/modules/main/views/dashboard.balloonView.html"
       });
 
 

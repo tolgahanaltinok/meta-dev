@@ -68,8 +68,8 @@
 				<div class="row-fluid">
 					<div class="tabbable tabbable-custom tabbable-full-width">
 						<ul class="nav nav-tabs">
-							<li ng-class="{active:$state.includes('main.dashboard.list')}"><a>Topic Overview</a></li>
-							<li ng-class="{ active: $state.includes('main.dashboard.balloon')}"><a>Balloon View</a></li>
+							<li ng-class="{active:$state.includes('main.dashboard.list')}" ui-sref="main.dashboard.list"><a>Topic Overview</a></li>
+							<li ng-class="{ active: $state.includes('main.dashboard.balloon')}" ui-sref="main.dashboard.balloon"><a>Balloon View</a></li>
 						</ul>
 						<div class="tab-content" ui-view>
 						</div>	
