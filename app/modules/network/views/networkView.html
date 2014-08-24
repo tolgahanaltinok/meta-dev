@@ -55,10 +55,10 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a ui-sref="main.dashboard.list">Home</a> 
+								<a ui-sref="main.network.list({networkId:$stateParams.networkId})">Home</a> 
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a ui-sref="main.dashboard.list" >Dashboard</a></li>
+							<li><a ui-sref="main.network.list({networkId:$stateParams.networkId})" >Dashboard</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -68,8 +68,8 @@
 				<div class="row-fluid">
 					<div class="tabbable tabbable-custom tabbable-full-width">
 						<ul class="nav nav-tabs">
-							<li ng-class="{active:$state.includes('main.dashboard.list')}" ><a ui-sref="main.dashboard.list">Topic Overview</a></li>
-							<li ng-class="{ active: $state.includes('main.dashboard.balloon')}" ><a ui-sref="main.dashboard.balloon" >Balloon View</a></li>
+							<li ng-class="{active:$state.includes('main.network.list')}" ><a ui-sref="main.network.list({networkId:$stateParams.networkId})">Topic Overview</a></li>
+							<li ng-class="{ active: $state.includes('main.network.balloon')}" ><a ui-sref="main.network.balloon({networkId:$stateParams.networkId})" >Balloon View</a></li>
 						</ul>
 						<div class="tab-content" ui-view>
 						</div>	

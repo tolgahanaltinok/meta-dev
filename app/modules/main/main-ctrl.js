@@ -2,7 +2,15 @@
 
 app.controller('mainCtrl', ['$scope', '$state', 'networkService', function ($scope, $state, networkService) {
     $scope.networks = networkService.getNetworks();
-    $state.go('main.dashboard.list');
+
+    console.log($state);
+
+    if($state.is("main")){
+        $state.go("main.dashboard.list");
+        console.log($state.is("main"));
+    }
+        
+
   }])
   .controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {
 $scope.login = function (userLogin) {
