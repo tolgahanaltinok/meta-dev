@@ -33,12 +33,12 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
           templateUrl: "/modules/main/views/dashboard.listView.html"
       })
       .state('main.dashboard.balloon', {
-          url: '/list',
+          url: '/balloon',
           templateUrl: "/modules/main/views/dashboard.balloonView.html"
       });
 
 
-    $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.otherwise('/login');
 
 
 
