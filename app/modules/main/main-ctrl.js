@@ -1,7 +1,8 @@
 'use strict';
 
-app.controller('mainCtrl', function ($scope) {
-  })
+app.controller('mainCtrl', ['$scope', '$state', function ($scope, $state) {
+    $state.go('main.dashboard');
+  }])
   .controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {
 $scope.login = function (userLogin) {
         $scope.errorMessage = '';
@@ -33,7 +34,7 @@ $scope.login = function (userLogin) {
         authService.registerUser(userRegistration).success(function (data) {
             return authService.login({ userName: userRegistration.userName, password: userRegistration.password }).$promise
             .then(function (data) {
-                $state.go('home');
+                $state.go('main');
             });
         }).catch(function (error) {
             if (error.status === 400) {

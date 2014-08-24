@@ -19,12 +19,22 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
 	        controller: 'registerCtrl'
 	    })
 	    .state('main', {
-	    	url: "/",
+  	    	url: "/main",
 	        templateUrl: 'partials/main.html',
 	        controller: 'mainCtrl'
-	    });
+	    })
+      .state('main.dashboard', {
+          url: '/dashboard',
+          templateUrl: "/modules/main/views/dashboardView.html",
+          controller: 'dashboardCtrl'
+      })
+      .state('main.dashboard.list', {
+          url: '/list',
+          templateUrl: "/modules/main/views/dashboard.listView.html"
+      });
 
-    $urlRouterProvider.otherwise('login');
+
+    $urlRouterProvider.otherwise('/main');
 
 
 
@@ -33,7 +43,10 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
 
 }]).factory("userProfileSvc", function () {
     return {};
-}).run(function($rootScope, $state, authService) {
+}).run(function($rootScope, $state,$stateParams, authService) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, error) {
         if (toState.name !== "login" && toState.name !== "register") {
             if (!authService.isLoggedIn()) {

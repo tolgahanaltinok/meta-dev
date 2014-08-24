@@ -1,4 +1,5 @@
 'use strict';
 
-app.controller('dashboardCtrl', function ($scope) {
-  });
+app.controller('dashboardCtrl', ['$scope', '$state', function ($scope, $state) {
+	$state.go('main.dashboard.list');
+  }]);
