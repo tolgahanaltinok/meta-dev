@@ -308,9 +308,10 @@
   <!-- END HEADER -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar nav-collapse in collapse" style="height: auto;">
+    <div class="page-sidebar nav-collapse in collapse">
       <!-- BEGIN SIDEBAR MENU -->        
-      <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 569px;"><ul class="page-sidebar-menu" style="overflow: hidden; width: auto; height: 569px;">
+      <div slimscroll="{height:{{calculateFixedSidebarViewportHeight()}}}">
+        <ul class="page-sidebar-menu" >
         <li>
           <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
           <div class="sidebar-toggler hidden-phone"></div>

@@ -9,7 +9,15 @@ app.controller('mainCtrl', ['$scope', '$state', 'networkService', function ($sco
         $state.go("main.dashboard.list");
         console.log($state.is("main"));
     }
-        
+    
+    $scope.calculateFixedSidebarViewportHeight = function () {
+        var sidebarHeight = $(window).height() - $('.header').height() + 1;
+        if ($('body').hasClass("page-footer-fixed")) {
+            sidebarHeight = sidebarHeight - $('.footer').height();
+        }
+
+        return sidebarHeight; 
+    }  
 
   }])
   .controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {

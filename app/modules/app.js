@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router','ui.bootstrap'])
+angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router','ui.bootstrap','ui.slimscroll'])
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',  
     function ($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
     $httpProvider.defaults.useXDomain = true;
