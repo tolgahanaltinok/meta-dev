@@ -35,7 +35,16 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
       .state('main.dashboard.balloon', {
           url: '/balloon',
           templateUrl: "/modules/main/views/dashboard.balloonView.html"
-      });
+      })
+      .state('main.network.list', {
+          url: '/list',
+          templateUrl: "/modules/network/views/network.listView.html"
+      })
+      .state('main.network.balloon', {
+          url: '/balloon',
+          templateUrl: "/modules/network/views/network.balloonView.html"
+      })
+      ;
 
 
     $urlRouterProvider.otherwise('/login');
