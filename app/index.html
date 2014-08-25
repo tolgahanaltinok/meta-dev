@@ -1,22 +1,20 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="no-js" ng-app="metaTemp">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>frontend</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
-
     <!-- build:css({.tmp,app}) styles/main.css -->
     <!--<link rel="stylesheet" href="styles/main.css">-->
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/bootstrap-responsive.css">
-    
+
     <link rel="stylesheet" href="styles/style-metro.css">
     <link rel="stylesheet" href="styles/style-non-responsive.css">
     <link rel="stylesheet" href="styles/style-responsive.css">
@@ -34,12 +32,11 @@
     <link rel="stylesheet" href="styles/pages/search.css">
 
     <!-- endbuild -->
-
     <!-- build:js scripts/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-  </head>
-  <body class="page-header-fixed page-sidebar-fixed">
+</head>
+<body class="page-header-fixed page-sidebar-fixed">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -50,7 +47,6 @@
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/slimscroll/jquery.slimscroll.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -60,21 +56,23 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-slimscroll/angular-slimscroll.js"></script>
-
     <!-- endbower -->
     <!-- endbuild -->
+
+    <script src="bower_components/slimscroll/jquery.slimscroll.js"></script>
 
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="modules/app.js"></script>
     <script src="modules/main/main-ctrl.js"></script>
     <script src="modules/main/dashboard-ctrl.js"></script>
+    <script src="modules/auth/auth-ctrl.js"></script>
     <script src="modules/auth/authService.js"></script>
     <script src="modules/auth/authServiceHelper.js"></script>
     <script src="modules/network/networkService.js"></script>
-    
+
     <!-- inject:partials -->
     <!-- endinject -->
     <!-- endbuild -->
 
-  </body>
+</body>
 </html>

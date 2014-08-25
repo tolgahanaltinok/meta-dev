@@ -9,6 +9,7 @@ angular.module('metaTemp')
     var AccountRegister = authServiceHelper.AccountRegister;
     var AccountLogOff = authServiceHelper.AccountLogOff;
 
+    var CurrentUser = { id: '0', username: '', name: '', surname: '' };
     var userData = { 
       isAuthenticated: false,
       username: '',

@@ -294,7 +294,7 @@
               <li class="divider"></li>
               <li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> Full Screen</a></li>
               <li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
-              <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+              <li><a ng-click="logOut()"><i class="icon-key"></i> Log Out</a></li>
             </ul>
           </li>
           <!-- END USER LOGIN DROPDOWN -->
@@ -344,12 +344,8 @@
           </a>
           <ul class="sub-menu" style="display:block">
             <li ng-repeat="network in networks">
-              <a ui-sref="main.network.list({networkId:network.id})">
-                {{network.name}}</a>
-            </li>
-            <li>
-              <a href="layout_language_bar.html">
-              <span class="badge badge-roundless badge-important">new</span>Language Switch Bar</a>
+              <a ui-sref="main.network.list({networkId:network.Id})">
+                {{network.Name}}</a>
             </li>
           </ul>
         </li>
@@ -362,12 +358,8 @@
           </a>
           <ul class="sub-menu" style="display:block">
             <li ng-repeat="network in networks">
-              <a ui-sref="main.network.list({networkId:network.id})">
-                {{network.name}}</a>
-            </li>
-            <li>
-              <a href="layout_language_bar.html">
-              <span class="badge badge-roundless badge-important">new</span>Language Switch Bar</a>
+              <a ui-sref="main.network.list({networkId:network.Id})">
+                {{network.Name}}</a>
             </li>
           </ul>
         </li>
@@ -380,12 +372,8 @@
           </a>
           <ul class="sub-menu" style="display:block">
             <li ng-repeat="network in networks">
-              <a ui-sref="main.network.list({networkId:network.id})">
-                {{network.name}}</a>
-            </li>
-            <li>
-              <a href="layout_language_bar.html">
-              <span class="badge badge-roundless badge-important">new</span>Language Switch Bar</a>
+              <a ui-sref="main.network.list({networkId:network.Id})">
+                {{network.Name}}</a>
             </li>
           </ul>
         </li>
