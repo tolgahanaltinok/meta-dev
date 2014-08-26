@@ -1,4 +1,4 @@
-﻿app.controller('loginCtrl', ['$scope', '$state', 'authService','$http', function ($scope, $state, authService,$http) {
+﻿app.controller('loginCtrl', ['$scope', '$state', 'authService', '$http', function ($scope, $state, authService, $http) {
     $scope.login = function (userLogin) {
         $scope.errorMessage = '';
         authService.login(userLogin).$promise
@@ -18,9 +18,43 @@
     };
 }])
 .controller('registerCtrl', ['$scope', '$state', 'authService', function ($scope, $state, authService) {
+
+    $scope.modalShown = false;
+    $scope.toggleModal = function () {
+        $scope.modalShown = !$scope.modalShown;
+    };
+
+    $scope.htmlTooltipEmail = "Enter Valid Mail";
+    $scope.htmlTooltipUserName = "Enter Valid UserName";
+    $scope.htmlTooltipPassword = "Password must contain 1 digit 1 letter and should be at least 6 characters";
+    $scope.htmlTooltipConfirmPassword = "Confirm password should match password";
+    $scope.usrRegister = {};
+
     $scope.register = function (userRegistration) {
+
+        if (userRegistration == undefined) {
+
+            console.log("No field filled");
+            return;
+        }
+
+        if (userRegistration.Username === undefined || userRegistration.Password === undefined ||
+
+            userRegistration.Email === undefined) {
+
+            console.log("Complete all fields");
+
+            return;
+        }
+
         if (userRegistration.Password !== userRegistration.ConfirmPassword) {
             console.log("Passwords do not match");
+            return;
+        }
+
+        if ($scope.checkTerms === false) {
+
+            console.log("Terms not accepted");
             return;
         }
 
@@ -33,6 +67,7 @@
             });
         }).catch(function (error) {
             if (error.status === 400) {
+
                 $scope.errorMessage = "Email already exists.";
             }
             else {
@@ -40,4 +75,10 @@
             }
         });
     };
-}])
+
+
+    $scope.goToLogin = function () {
+        $state.go('login');
+    }
+}]);
+

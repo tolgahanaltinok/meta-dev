@@ -9,4 +9,5 @@ app.controller('dashboardCtrl', ['$scope', '$stateParams', '$state', 'networkSer
             }, function (error) {
                 //alert(error.data.message);
             });
+
   }]);

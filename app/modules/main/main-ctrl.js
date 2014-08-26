@@ -3,10 +3,18 @@
 app.controller('mainCtrl', ['$scope', '$state', 'networkService', '$cookieStore', 'authService', function ($scope, $state, networkService, $cookieStore, authService) {
 
     $scope.networks = [];
+    $scope.userNetworkRelations = [];
 
     networkService.getNetworks()
             .then(function (results) {
                 $scope.networks = results.data;
+            }, function (error) {
+                //alert(error.data.message);
+            });
+
+    networkService.getUsersInDomainNetwork()
+            .then(function (results) {
+                $scope.userNetworkRelations = results.data;
             }, function (error) {
                 //alert(error.data.message);
             });

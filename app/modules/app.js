@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'ui.slimscroll'])
+angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'angularMoment', 'ui.slimscroll'])
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide',
     function ($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
         $httpProvider.defaults.useXDomain = true;
@@ -40,15 +40,16 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
 
           .state('main.network', {
               abstract: true,
-              url: '/network',
+              url: '/network/:networkId',
               templateUrl: "/modules/network/views/networkView.html",
+              controller: 'networkCtrl'
           })
           .state('main.network.list', {
-              url: '/list/:networkId',
+              url: '/list/',
               templateUrl: "/modules/network/views/network.listView.html"
           })
           .state('main.network.balloon', {
-              url: '/balloon/:networkId',
+              url: '/balloon/',
               templateUrl: "/modules/network/views/network.balloonView.html"
           })
         ;
@@ -89,4 +90,13 @@ angular.module('metaTemp').constant('ngAuthSettings', {
 });
 
 var app = angular.module('metaTemp');
-
+moment.lang('en', {
+    calendar: {
+        sameDay: '[Today]',
+        nextDay: '[Tomorrow]',
+        nextWeek: 'dddd',
+        lastDay: '[Yesterday]',
+        lastWeek: '[last] dddd',
+        sameElse: 'L'
+    }
+});

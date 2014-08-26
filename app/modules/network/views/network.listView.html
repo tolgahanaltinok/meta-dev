@@ -1,1 +1,415 @@
-<div>im network dashboard list view -- {{$stateParams.networkId}}</div>
+
+<div class="span6" ng-repeat="topic in topics" style="margin-left:0px;">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet paddingless" style="padding-left:15px;padding-right:15px;">
+        <div class="portlet-title line">
+            <div class="caption"><i class="icon-star " ng-class="{'zero':topic.Proirity==0,'one':topic.Proirity==1,'two':topic.Proirity==2,'three':topic.Proirity==3,'four':topic.Proirity==4,'five':topic.Proirity==5}"></i>{{topic.Name}}</div>
+            <div class="tools">
+                <a href="" class="collapse"></a>
+                <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                <a href="" class="reload"></a>
+                <a href="" class="remove"></a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <!--Tabs Bootstrap UI-->
+            <tabset justified="true">
+                <tab heading="Tasks">
+                    <div class="scroller" data-always-visible="1" data-rail-visible="0" slimscroll="{height:{{150}}}">
+                        <ul class="feeds">
+                            <li ng-repeat="task in topic.Tasks">
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label " ng-class="{'label-success':task.StatusType==2,'label-info':task.StatusType==0,'label-warning':task.StatusType==1}">
+                                                <i ng-class="{'icon-check':task.StatusType==2,' icon-check-empty':task.StatusType==0,'icon-edit':task.StatusType==1}"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                {{task.Name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date">
+                                        {{task.DueDate | amCalendar}}
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </tab>
+                <tab heading="Activities">
+                    <div class="scroller" style="height:290px" data-always-visible="1" data-rail-visible1="1">
+                        <ul class="feeds">
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New order received
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            10 mins
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-important">
+                                                <i class="icon-bolt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                Order #24DOP4 has been rejected.
+                                                <span class="label label-important label-mini">Take action <i class="icon-share-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date">
+                                        24 mins
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-success">
+                                                    <i class="icon-bell"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    New user registered
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            Just now
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </tab>
+                <tab heading="Recent Users">
+                    <div class="scroller" style="height:290px" data-always-visible="1" data-rail-visible1="1">
+                        <div class="row-fluid">
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Robert Nilson</a>
+                                        <span class="label label-success">Approved</span>
+                                    </div>
+                                    <div>29 Jan 2013 10:45AM</div>
+                                </div>
+                            </div>
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Lisa Miller</a>
+                                        <span class="label label-info">Pending</span>
+                                    </div>
+                                    <div>19 Jan 2013 10:45AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Eric Kim</a>
+                                        <span class="label label-info">Pending</span>
+                                    </div>
+                                    <div>19 Jan 2013 12:45PM</div>
+                                </div>
+                            </div>
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Lisa Miller</a>
+                                        <span class="label label-important">In progress</span>
+                                    </div>
+                                    <div>19 Jan 2013 11:55PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Eric Kim</a>
+                                        <span class="label label-info">Pending</span>
+                                    </div>
+                                    <div>19 Jan 2013 12:45PM</div>
+                                </div>
+                            </div>
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Lisa Miller</a>
+                                        <span class="label label-important">In progress</span>
+                                    </div>
+                                    <div>19 Jan 2013 11:55PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div><a href="#">Eric Kim</a> <span class="label label-info">Pending</span></div>
+                                    <div>19 Jan 2013 12:45PM</div>
+                                </div>
+                            </div>
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Lisa Miller</a>
+                                        <span class="label label-important">In progress</span>
+                                    </div>
+                                    <div>19 Jan 2013 11:55PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div><a href="#">Eric Kim</a> <span class="label label-info">Pending</span></div>
+                                    <div>19 Jan 2013 12:45PM</div>
+                                </div>
+                            </div>
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Lisa Miller</a>
+                                        <span class="label label-important">In progress</span>
+                                    </div>
+                                    <div>19 Jan 2013 11:55PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Eric Kim</a>
+                                        <span class="label label-info">Pending</span>
+                                    </div>
+                                    <div>19 Jan 2013 12:45PM</div>
+                                </div>
+                            </div>
+                            <div class="span6 user-info">
+                                <img alt="" src="assets/img/avatar.png" />
+                                <div class="details">
+                                    <div>
+                                        <a href="#">Lisa Miller</a>
+                                        <span class="label label-important">In progress</span>
+                                    </div>
+                                    <div>19 Jan 2013 11:55PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+            <!--End Tabs Bootstrap UI-->
+        </div>
+    </div>
+    <!-- END PORTLET-->
+</div>

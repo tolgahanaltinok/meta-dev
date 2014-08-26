@@ -9,7 +9,6 @@ angular.module('metaTemp')
     var AccountRegister = authServiceHelper.AccountRegister;
     var AccountLogOff = authServiceHelper.AccountLogOff;
 
-    var CurrentUser = { id: '0', username: '', name: '', surname: '' };
     var userData = { 
       isAuthenticated: false,
       username: '',
@@ -100,15 +99,14 @@ angular.module('metaTemp')
             return registration;
         },
         logOffUser: function () {
-            AccountLogOff.logOff();
+            clearUserData();
             $http.defaults.headers.common.Authorization = undefined;
-            CurrentUser = { id: '0',username: '', name: '',surname: ''};
         },
         getCurrentUser : function(){
-            return CurrentUser;
+            return userData;
         },
         setCurrentUser: function(user) {
-                CurrentUser = user ;
+            userData = user;
         },
         isLoggedIn: isAuthenticated
     };

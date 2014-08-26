@@ -6,6 +6,10 @@
 	<!-- END LOGO -->
 	<!-- BEGIN LOGIN -->
 	<div class="content">
+
+        <modal-dialog show='modalShown' width='400px' height='60%'>
+            <p>Modal Content Goes here<p>
+        </modal-dialog>
 		<!-- BEGIN REGISTRATION FORM -->
         <form class="form-vertical register-form" name="userForm" ng-submit="register(usrRegister)">
             <h3>Sign Up</h3>
@@ -16,8 +20,13 @@
                 <div class="controls">
                     <div class="input-icon left">
                         <i class="icon-envelope"></i>
-                        <input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" ng-model="usrRegister.Email" />
+                        <input class="m-wrap placeholder-no-fix" type="email"
+                               placeholder="Email" name="email" ng-model="usrRegister.Email"
+                               tooltip="Enter Valid Email"
+                               tooltip-trigger="userForm.email.$invalid" tooltip-placement="right" />
                     </div>
+                    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine"
+                       class="help-block">Your e-mail is required.</p>
                 </div>
             </div>
 
@@ -27,7 +36,10 @@
                 <div class="controls">
                     <div class="input-icon left">
                         <i class="icon-user"></i>
-                        <input class="m-wrap placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" ng-model="usrRegister.Username" />
+                        <input class="m-wrap placeholder-no-fix" type="text"
+                               autocomplete="off" placeholder="Username" name="username"
+                               ng-model="usrRegister.Username" tooltip-html-unsafe={{htmlTooltipUserName}}
+                               tooltip-trigger="focus" tooltip-placement="right" />
                     </div>
                 </div>
             </div>
@@ -36,7 +48,10 @@
                 <div class="controls">
                     <div class="input-icon left">
                         <i class="icon-lock"></i>
-                        <input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password" ng-model="usrRegister.Password" />
+                        <input class="m-wrap placeholder-no-fix" type="password" autocomplete="off"
+                               id="register_password" placeholder="Password" name="password"
+                               ng-model="usrRegister.Password" tooltip-html-unsafe={{htmlTooltipPassword}}
+                               tooltip-trigger="focus" tooltip-placement="right" />
                     </div>
                 </div>
             </div>
@@ -45,20 +60,24 @@
                 <div class="controls">
                     <div class="input-icon left">
                         <i class="icon-ok"></i>
-                        <input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" ng-model="usrRegister.ConfirmPassword" />
+                        <input class="m-wrap placeholder-no-fix" type="password"
+                               autocomplete="off" placeholder="Re-type Your Password"
+                               name="rpassword" ng-model="usrRegister.ConfirmPassword"
+                               tooltip-html-unsafe={{htmlTooltipConfirmPassword}}
+                               tooltip-trigger="focus" tooltip-placement="right" />
                     </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
                     <label class="checkbox">
-                        <input type="checkbox" name="tnc" /> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        <input type="checkbox" name="tnc" ng-model="checkTerms" /> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
                     </label>
                     <div id="register_tnc_error"></div>
                 </div>
             </div>
             <div class="form-actions">
-                <button id="register-back-btn" type="button" class="btn">
+                <button id="register-back-btn" type="button" ng-click="goToLogin()" class="btn">
                     <i class="m-icon-swapleft"></i>  Back
                 </button>
                 <button type="submit" id="register-submit-btn" class="btn green pull-right" ng-disabled="userForm.$invalid">

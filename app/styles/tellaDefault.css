@@ -1,0 +1,45 @@
+﻿.icon-star.zero {
+    color: #ffd800 !important;
+}
+
+.icon-star.one {
+    color: #0094ff !important;
+}
+
+.icon-star.two {
+    color: #ff6a00 !important;
+}
+
+.icon-star.three {
+    color: #b200ff !important;
+}
+
+.icon-star.four {
+    color: #4800ff !important;
+}
+
+.icon-star.five {
+    color: #ff006e !important;
+}
+
+
+.feeds .col2 .date {
+    padding: 4px 9px 4px 4px;
+    text-align: right;
+    font-style: italic;
+    color: #0F3D53;
+}
+
+ul.page-sidebar-menu > li > ul.sub-menu > li > .member {
+    padding-left: 15px !important;
+}
+
+.member > .memberShortName {
+    display: inline-block;
+    background-color: chocolate;
+    padding: 0px 3px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 3px 3px 3px 3px !important;
+    -webkit-border-radius: 3px 3px 3px 3px !important;
+}
