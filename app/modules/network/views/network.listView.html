@@ -17,7 +17,7 @@
                 <tab heading="Tasks">
                     <div class="scroller" data-always-visible="1" data-rail-visible="0" slimscroll="{height:{{150}}}">
                         <ul class="feeds">
-                            <li ng-repeat="task in topic.Tasks">
+                            <li ng-repeat="task in topic.Tasks" ng-controller="task-ctrl">
                                 <div class="col1">
                                     <div class="cont">
                                         <div class="cont-col1">
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col2">
                                     <div class="date">
-                                        {{task.DueDate | amCalendar}}
+                                        <label class="datetimepicker_tella" vg-date time-picker="false" type="text" date-model="task.DueDate" on-date-selected="updateTaskDate(date)">{{task.DueDate | amCalendar}}</label>
                                     </div>
                                 </div>
                             </li>

@@ -43,3 +43,41 @@ ul.page-sidebar-menu > li > ul.sub-menu > li > .member {
     border-radius: 3px 3px 3px 3px !important;
     -webkit-border-radius: 3px 3px 3px 3px !important;
 }
+
+.details{
+    height: 250px;
+    vertical-align:text-bottom;
+}
+
+.circleLabel{
+    padding-top: 0px !important;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    background-color: rgba(255,255,255,0.0) !important;
+    text-align: center;
+    height:inherit;
+    width:inherit;
+}
+
+p.circleLabel{
+    padding-top: 2px;
+    padding-bottom: 2px;    
+    vertical-align: middle;
+    line-height: 12px;    
+    display: inline-block;
+}
+
+.taskView{
+    padding-top: 0px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgba(255,255,255,0.0);
+    text-align: center;
+}
+
+h1.taskView{
+    font-size: 56px;
+}
+
+p.taskView{
+    font-size: 34px;
+}

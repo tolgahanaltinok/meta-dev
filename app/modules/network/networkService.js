@@ -47,12 +47,21 @@ app.factory('networkService',
                 });
             }
 
+            var _putTopic = function (topic) {
+                var data = new Object();
+                data = topic;
+                return $http.put(serviceBase + 'api/Tasks/'+data.Id, data).then(function (results) {
+                    return results;
+                });
+            }
+
             return {
                 getNetworks: _getNetworks,
                 getTopics: _getTopics,
                 getUsersInDomainNetwork: _getUsersInDomainNetwork,
                 getUsersByNetwork: _getUsersByNetwork,
-                getTopicsByNetwork: _getTopicsByNetwork
+                getTopicsByNetwork: _getTopicsByNetwork,
+                putTopic : _putTopic
 
             }
         }]);

@@ -83,13 +83,14 @@ angular.module('metaTemp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         });
     });
 
-var serviceBase = 'http://localhost:45123/';
+var serviceBase = 'http://tellawebapimig.azurewebsites.net/';
 
 angular.module('metaTemp').constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
 });
 
 var app = angular.module('metaTemp');
+
 moment.lang('en', {
     calendar: {
         sameDay: '[Today]',
@@ -98,5 +99,34 @@ moment.lang('en', {
         lastDay: '[Yesterday]',
         lastWeek: '[last] dddd',
         sameElse: 'L'
+    }
+});
+
+app.directive('vgDate', function () {
+    'use strict';
+    var options;
+    options = {};
+    return {
+        require: '?ngModel',
+        restrict: 'EA',
+        scope: {
+            dateModel: '=',
+            onDateSelected: '&'
+        },
+        link: function (scope, element, attrs, controller) {
+            element.datetimepicker({
+                timepicker: attrs.timePicker == "false"? false:true,
+                formatDate: 'd/m/y',
+                formatTime: 'H:i',
+                step: '30',
+                onSelectDate: function (dp) {
+                    console.log("Date triggered");
+                    scope.onDateSelected({ date: dp });
+                }
+            });
+
+
+
+        }
     }
 });

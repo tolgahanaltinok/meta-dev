@@ -5,12 +5,12 @@
 	</div>
 	<!-- END LOGO -->
 	<!-- BEGIN LOGIN -->
-	<div class="content">
+    <div class="content">
 
         <modal-dialog show='modalShown' width='400px' height='60%'>
             <p>Modal Content Goes here<p>
         </modal-dialog>
-		<!-- BEGIN REGISTRATION FORM -->
+        <!-- BEGIN REGISTRATION FORM -->
         <form class="form-vertical register-form" name="userForm" ng-submit="register(usrRegister)">
             <h3>Sign Up</h3>
             <p>Enter your personal details below:</p>
@@ -26,7 +26,8 @@
                                tooltip-trigger="userForm.email.$invalid" tooltip-placement="right" />
                     </div>
                     <p ng-show="userForm.email.$invalid && !userForm.email.$pristine"
-                       class="help-block">Your e-mail is required.</p>
+                       class="help-block">Your E-mail is required</p>
+                    <p ng-show="responseBool">{{responseMsg}}</p>
                 </div>
             </div>
 
@@ -51,7 +52,7 @@
                         <input class="m-wrap placeholder-no-fix" type="password" autocomplete="off"
                                id="register_password" placeholder="Password" name="password"
                                ng-model="usrRegister.Password" tooltip-html-unsafe={{htmlTooltipPassword}}
-                               tooltip-trigger="focus" tooltip-placement="right" />
+                               tooltip-trigger="focus" tooltip-placement="right" ng-pattern="passPattern" />
                     </div>
                 </div>
             </div>
@@ -85,8 +86,8 @@
                 </button>
             </div>
         </form>
-		<!-- END REGISTRATION FORM -->
-	</div>
+        <!-- END REGISTRATION FORM -->
+    </div>
 	<!-- END LOGIN -->
 	<!-- BEGIN COPYRIGHT -->
 	<div class="copyright">

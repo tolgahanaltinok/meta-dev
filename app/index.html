@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="styles/pages/error.css">
     <link rel="stylesheet" href="styles/pages/login.css">
     <link rel="stylesheet" href="styles/pages/search.css">
+    <link href="bower_components/jquery-datetimepicker/jquery.datetimepicker.css" rel="stylesheet" />
 
     <!-- endbuild -->
     <!-- build:js scripts/modernizr.js -->
@@ -43,7 +44,6 @@
     <![endif]-->
     <cst-loading-overlay class="hide"></cst-loading-overlay>
     <div ui-view></div>
-
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -59,15 +59,19 @@
     <script src="bower_components/angular-slimscroll/angular-slimscroll.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/ngDraggable/ngDraggable.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <script src="bower_components/slimscroll/jquery.slimscroll.js"></script>
+    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
 
+    <script src="bower_components/jquery-datetimepicker/jquery.datetimepicker.js"></script>
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="modules/app.js"></script>
     <script src="modules/main/main-ctrl.js"></script>
     <script src="modules/main/dashboard-ctrl.js"></script>
+    <script src="modules/task/task-ctrl.js"></script>
     <script src="modules/network/network-ctrl.js"></script>
     <script src="modules/auth/auth-ctrl.js"></script>
     <script src="modules/auth/authService.js"></script>

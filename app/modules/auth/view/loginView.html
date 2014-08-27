@@ -38,7 +38,8 @@
 				</label>
 				<button type="submit" id="register-submit-btn" class="btn green pull-right" ng-disabled="userForm.$invalid">
 				Login <i class="m-icon-swapright m-icon-white"></i>
-				</button>            
+				</button>
+                <p ng-show="responseLoginBool">{{responseLoginMsg}}</p>
 			</div>
 			<div class="forget-password">
 				<h4>Forgot your password ?</h4>
